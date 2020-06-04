@@ -9,6 +9,7 @@
   "author": "Iulian Carnaru",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.0.0",
     "validator": "^13.0.0"
   }
 }
