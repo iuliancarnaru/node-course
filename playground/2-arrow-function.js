@@ -37,7 +37,26 @@ const eventThree = {
   },
 };
 
-console.log(square(3));
-console.log(squareArrow(3));
-console.log(squareArrowTwo(3));
-console.log(event.printGuestList());
+// CHALLENGE SECTION
+
+const tasks = {
+  tasks: [
+    {
+      text: "Grocery shopping",
+      completed: true,
+    },
+    {
+      text: "Clean yard",
+      completed: false,
+    },
+    {
+      text: "Film course",
+      completed: false,
+    },
+  ],
+  getTasksToDo() {
+    return this.tasks.filter((task) => task.completed !== true);
+  },
+};
+
+console.log(tasks.getTasksToDo());
