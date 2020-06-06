@@ -1,18 +1,52 @@
-const validator = require('validator');
-const chalk = require('chalk');
-const add = require('./utils.js');
-const notes = require('./notes.js');
+const chalk = require("chalk");
+const yargs = require("yargs");
+const getNotes = require("./notes");
 
-const sum = add(3, 4);
+yargs.version("1.1.0");
 
-console.log(sum);
-console.log(notes());
+yargs.command({
+  command: "add",
+  describe: "Add a new note",
+  builder: {
+    title: {
+      describe: "Note title",
+      demandOption: true,
+      type: "string",
+    },
+    body: {
+      describe: "Note body",
+      demandOption: true,
+      type: "string",
+    },
+  },
+  handler: function (argv) {
+    console.log(`Title: ${argv.title}`);
+    console.log(`Body: ${argv.body}`);
+  },
+});
 
-console.log(validator.isEmail('test@example.com'));
-console.log(validator.isURL('http://www.example.com'));
+yargs.command({
+  command: "remove",
+  describe: "Remove a note",
+  handler: function () {
+    console.log("Removing a note");
+  },
+});
 
-console.log(chalk.green.bold('Success'));
-console.log(chalk.red.bold('Error'));
-console.log(chalk.bgBlue.bold('Loading'));
+yargs.command({
+  command: "list",
+  describe: "List all notes",
+  handler: function () {
+    console.log("Listing all notes");
+  },
+});
 
-console.log(chalk`There are {yellow.bold 5280 feet} in a mile`);
+yargs.command({
+  command: "read",
+  describe: "Read a note",
+  handler: function () {
+    console.log("Reading a note");
+  },
+});
+
+yargs.parse();
