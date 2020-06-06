@@ -5,16 +5,32 @@ const getNotes = () => `Your notes...`;
 
 const addNote = (title, body) => {
   const notes = loadNotes();
-  const duplicateNotes = notes.filter((note) => note.title === title);
-  if (duplicateNotes.length === 0) {
+  // search trough all the items in the array even duplicate is found
+  // const duplicateNotes = notes.filter((note) => note.title === title);
+
+  // stops at first duplicate item found (if no match, returns undefined)
+  const duplicateNote = notes.find((note) => note.title === title);
+
+  if (!duplicateNote) {
     notes.push({
       title: title,
       body: body,
     });
     saveNotes(notes);
-    console.log("New note added");
+    console.log(chalk.green.inverse("New note added"));
   } else {
-    console.log("Note title taken");
+    console.log(chalk.red.inverse("Note title taken"));
+  }
+};
+
+const readNote = (title) => {
+  const notes = loadNotes();
+  const note = notes.find((note) => note.title === title);
+  if (note) {
+    console.log(chalk.green.inverse(note.title));
+    console.log(note.body);
+  } else {
+    console.log(chalk.red.inverse("Note not found"));
   }
 };
 
@@ -44,8 +60,23 @@ const removeNote = (title) => {
   }
 };
 
+const listNotes = () => {
+  const notes = loadNotes();
+
+  if (notes.length) {
+    console.log(chalk.inverse("Your notes"));
+    notes.forEach((note) => {
+      console.log(note.title);
+    });
+  } else {
+    console.log(chalk.red.inverse("No notes found"));
+  }
+};
+
 module.exports = {
   getNotes,
   addNote,
   removeNote,
+  listNotes,
+  readNote,
 };
