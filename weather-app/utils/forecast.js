@@ -1,7 +1,7 @@
 const superagent = require("superagent");
 
 const forecast = (long, lat, callback) => {
-  const url = `http://api.weatherstack.com/current?access_key=${process.env.WEATHERSTACK_API_KEY}&query="${long},${lat}"`;
+  const url = `http://api.weatherstack.com/current?access_key=${process.env.WEATHERSTACK_API_KEY}&query="${lat},${long}"`;
   superagent.get(url).end((err, res) => {
     if (err) {
       callback("Unable to connect to weather service", undefined);
