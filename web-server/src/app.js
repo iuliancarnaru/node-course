@@ -39,7 +39,9 @@ app.get("/weather", (req, res) => {
 
 // help page 404 (not found)
 app.get("/help/*", (req, res) => {
-  res.send("Help article not found");
+  res.render("not-found", {
+    message: "Help articles not found...",
+  });
 });
 
 // generic 404 (not found)
