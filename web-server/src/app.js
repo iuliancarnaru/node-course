@@ -2,9 +2,14 @@ const path = require("path");
 const express = require("express");
 
 const app = express();
+
 const publicDirectory = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../templates/views");
+
 app.use(express.static(publicDirectory));
+
 app.set("view engine", "pug");
+app.set("views", viewsPath);
 
 app.get("/", (req, res) => {
   res.render("homepage", {
