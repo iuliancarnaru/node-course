@@ -37,6 +37,17 @@ app.get("/weather", (req, res) => {
   });
 });
 
+// help page 404 (not found)
+app.get("/help/*", (req, res) => {
+  res.send("Help article not found");
+});
+
+// generic 404 (not found)
+app.get("*", (req, res) => {
+  res.render("not-found", {
+    message: "404 Upss...page not found",
+  });
+});
 app.listen(3000, () => {
   console.log("Server is runnging, visit on http://localhost:3000");
 });
