@@ -1,5 +1,12 @@
 const path = require("path");
 const express = require("express");
+const forecast = require("./utils/forecast.js");
+const geocode = require("./utils/geocode.js");
+
+const dotenv = require("dotenv");
+dotenv.config({ path: __dirname + "/.env" });
+
+console.log(process.env);
 
 const app = express();
 
@@ -31,9 +38,32 @@ app.get("/help", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
-  res.send({
-    location: "London",
-    forecast: "It is cloudy",
+  if (!req.query.address) {
+    return res.send({
+      error: "Please provide a valid address",
+    });
+  }
+
+  geocode(req.query.address, (err, { long, lat, location } = {}) => {
+    if (err) {
+      return res.send({
+        error: err,
+      });
+    }
+
+    forecast(long, lat, (err, forecastData) => {
+      if (err) {
+        return res.send({
+          error: err,
+        });
+      }
+
+      console.log(forecastData);
+
+      res.send({
+        ...forecastData,
+      });
+    });
   });
 });
 
