@@ -4,9 +4,7 @@ const forecast = require("./utils/forecast.js");
 const geocode = require("./utils/geocode.js");
 
 const dotenv = require("dotenv");
-dotenv.config({ path: __dirname + "/.env" });
-
-console.log(process.env);
+dotenv.config(path.join(__dirname + "../.env"));
 
 const app = express();
 
@@ -61,7 +59,7 @@ app.get("/weather", (req, res) => {
       console.log(forecastData);
 
       res.send({
-        ...forecastData,
+        forecastData,
       });
     });
   });
