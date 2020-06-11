@@ -32,3 +32,9 @@ const transaction = (type, { label, stock }) => {
 };
 
 transaction("order", product);
+transaction("order"); // Cannot destructure property 'label' of undefined
+
+// we have to provide a default parameter when object is not provided
+const transaction2 = (type, { label, stock = 0 } = {}) => {
+  console.log(type, label, stock);
+};

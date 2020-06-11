@@ -42,21 +42,19 @@ app.get("/weather", (req, res) => {
     });
   }
 
-  geocode(req.query.address, (err, { long, lat, location } = {}) => {
+  geocode(req.query.address, (error, { long, lat, location } = {}) => {
     if (err) {
       return res.send({
-        error: err,
+        error,
       });
     }
 
-    forecast(long, lat, (err, forecastData) => {
+    forecast(long, lat, (error, forecastData) => {
       if (err) {
         return res.send({
-          error: err,
+          error,
         });
       }
-
-      console.log(forecastData);
 
       res.send({
         forecastData,
