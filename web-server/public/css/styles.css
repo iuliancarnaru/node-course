@@ -29,6 +29,20 @@ header a {
   text-decoration: none;
 }
 
+input {
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-right: 5px;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid #888;
+  background: #333;
+  color: #fff;
+  padding: 8px;
+}
+
 .portrait {
   width: 250px;
   height: auto;
