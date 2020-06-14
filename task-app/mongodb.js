@@ -16,5 +16,53 @@ MongoClient.connect(
     }
 
     console.log(`Connected correctly to Mongo cluster`);
+    const db = client.db("task-app");
+
+    // db.collection("users").insertOne(
+    //   { name: "Iulian Carnaru", age: 35 },
+    //   (err, result) => {
+    //     if (err) {
+    //       console.log(`Unable to insert user`);
+    //     }
+    //     console.log(result.ops);
+    //   }
+    // );
+
+    // db.collection("users").insertMany(
+    //   [
+    //     { name: "Aneta", age: 28 },
+    //     { name: "Mari", age: 27 },
+    //   ],
+    //   (err, result) => {
+    //     if (err) {
+    //       console.log(`Unable to insert users`);
+    //     }
+    //     console.log(result.ops);
+    //   }
+    // );
+
+    db.collection("tasks").insertMany(
+      [
+        {
+          description: "Clean house",
+          completed: false,
+        },
+        {
+          description: "Do exercises",
+          completed: true,
+        },
+        {
+          description: "Clean dishes",
+          completed: false,
+        },
+      ],
+      (err, result) => {
+        if (err) {
+          console.log(`Unable to insert tasks`);
+        }
+
+        console.log(result.ops);
+      }
+    );
   }
 );
