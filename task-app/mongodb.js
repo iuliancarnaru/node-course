@@ -35,7 +35,7 @@ MongoClient.connect(
       ],
       (err, result) => {
         if (err) {
-          console.log(`Unable to insert tasks`);
+          return console.log(`Unable to insert tasks`);
         }
 
         console.log(result.ops);
