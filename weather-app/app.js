@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const dotenv = require("dotenv");
-dotenv.config({ path: __dirname + "/.env" });
+dotenv.config();
 
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");

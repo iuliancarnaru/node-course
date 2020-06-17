@@ -4,7 +4,7 @@ const forecast = require("./utils/forecast.js");
 const geocode = require("./utils/geocode.js");
 
 const dotenv = require("dotenv");
-dotenv.config(path.join(__dirname + "../.env"));
+dotenv.config();
 
 const app = express();
 

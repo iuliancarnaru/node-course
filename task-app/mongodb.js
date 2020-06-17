@@ -2,7 +2,8 @@
 const path = require("path");
 const dotenv = require("dotenv");
 const mongodb = require("mongodb");
-const MongoClient = mongodb.MongoClient;
+
+const { MongoClient, ObjectID } = mongodb;
 
 dotenv.config();
 
@@ -18,28 +19,27 @@ MongoClient.connect(
     console.log(`Connected correctly to Mongo cluster`);
     const db = client.db("task-app");
 
-    db.collection("tasks").insertMany(
-      [
-        {
-          description: "Clean house",
-          completed: false,
-        },
-        {
-          description: "Do exercises",
-          completed: true,
-        },
-        {
-          description: "Clean dishes",
-          completed: false,
-        },
-      ],
-      (err, result) => {
-        if (err) {
-          return console.log(`Unable to insert tasks`);
-        }
+    // CREATE (insertOne, insertMany)
 
-        console.log(result.ops);
+    // READ (findOne)
+    db.collection("users").findOne(
+      { _id: new ObjectID("5ee5cc75027c120f302b9d4d") },
+      (err, user) => {
+        if (err) return console.log(`Unable to fetch user`);
+        console.log(user);
       }
     );
+
+    db.collection("tasks")
+      .find({ completed: false })
+      .toArray((err, tasks) => {
+        console.log(tasks);
+      });
+
+    db.collection("tasks")
+      .find({ completed: false })
+      .count((err, count) => {
+        console.log(count);
+      });
   }
 );
