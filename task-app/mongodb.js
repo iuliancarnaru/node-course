@@ -20,26 +20,36 @@ MongoClient.connect(
     const db = client.db("task-app");
 
     // CREATE (insertOne, insertMany)
-
-    // READ (findOne)
-    db.collection("users").findOne(
-      { _id: new ObjectID("5ee5cc75027c120f302b9d4d") },
-      (err, user) => {
-        if (err) return console.log(`Unable to fetch user`);
-        console.log(user);
-      }
-    );
+    // READ (findOne, find(toArray, count))
+    // UPDATE (updateOne($set), updateMany)
+    db.collection("users")
+      .updateOne(
+        {
+          _id: new ObjectID("5ee5cc75027c120f302b9d4d"),
+        },
+        {
+          $inc: {
+            age: -1,
+          },
+        }
+      )
+      .then((result) => {
+        console.log(result.modifiedCount);
+      })
+      .catch((err) => console.log(err.message));
 
     db.collection("tasks")
-      .find({ completed: false })
-      .toArray((err, tasks) => {
-        console.log(tasks);
-      });
-
-    db.collection("tasks")
-      .find({ completed: false })
-      .count((err, count) => {
-        console.log(count);
-      });
+      .updateMany(
+        {
+          completed: false,
+        },
+        {
+          $set: {
+            completed: true,
+          },
+        }
+      )
+      .then((result) => console.log(result.modifiedCount))
+      .catch((err) => console.log(err.message));
   }
 );
