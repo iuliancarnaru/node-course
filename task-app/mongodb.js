@@ -22,34 +22,13 @@ MongoClient.connect(
     // CREATE (insertOne, insertMany)
     // READ (findOne, find(toArray, count))
     // UPDATE (updateOne($set), updateMany)
-    db.collection("users")
-      .updateOne(
-        {
-          _id: new ObjectID("5ee5cc75027c120f302b9d4d"),
-        },
-        {
-          $inc: {
-            age: -1,
-          },
-        }
-      )
-      .then((result) => {
-        console.log(result.modifiedCount);
-      })
-      .catch((err) => console.log(err.message));
+    // DELETE (deleteOne, deleteMany)
 
-    db.collection("tasks")
-      .updateMany(
-        {
-          completed: false,
-        },
-        {
-          $set: {
-            completed: true,
-          },
-        }
-      )
-      .then((result) => console.log(result.modifiedCount))
-      .catch((err) => console.log(err.message));
+    db.collection("users")
+      .deleteOne({ name: "Mari" })
+      .then((result) => {
+        console.log(result.deletedCount);
+      })
+      .catch((err) => console.log(err));
   }
 );
