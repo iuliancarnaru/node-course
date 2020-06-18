@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MongoDB - task-app@cluster0-9wqrx.mongodb.net">
+  <database-model serializer="dbm" dbms="MONGO" family-id="MONGO" format-version="4.18">
+    <root id="1">
+      <ServerVersion>4.2.6</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="admin"/>
+    <schema id="3" parent="1" name="local"/>
+    <schema id="4" parent="1" name="task-app">
+      <Current>1</Current>
+    </schema>
+    <table id="5" parent="4" name="tasks"/>
+    <table id="6" parent="4" name="users"/>
+    <column id="7" parent="5" name="_id">
+      <DataType>ObjectId(0)|12s</DataType>
+    </column>
+    <column id="8" parent="5" name="__v">
+      <Position>1</Position>
+      <DataType>Integer|4s</DataType>
+    </column>
+    <column id="9" parent="5" name="completed">
+      <Position>2</Position>
+      <DataType>Boolean|12s</DataType>
+    </column>
+    <column id="10" parent="5" name="description">
+      <Position>3</Position>
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="11" parent="6" name="_id">
+      <DataType>ObjectId(0)|12s</DataType>
+    </column>
+    <column id="12" parent="6" name="__v">
+      <Position>1</Position>
+      <DataType>Integer|4s</DataType>
+    </column>
+    <column id="13" parent="6" name="age">
+      <Position>2</Position>
+      <DataType>Integer|4s</DataType>
+    </column>
+    <column id="14" parent="6" name="email">
+      <Position>3</Position>
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="15" parent="6" name="name">
+      <Position>4</Position>
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="16" parent="6" name="password">
+      <Position>5</Position>
+      <DataType>String(0)|12s</DataType>
+    </column>
+  </database-model>
+</dataSource>
