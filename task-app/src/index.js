@@ -20,7 +20,15 @@ app.get("/users", (req, res) => {
 });
 
 app.get("/users/:id", (req, res) => {
-  console.log(req.params);
+  const _id = req.params.id;
+  User.findById(_id)
+    .then((user) => {
+      if (!user) return res.status(404).send();
+      res.send(user);
+    })
+    .catch((err) => {
+      res.status(500).send();
+    });
 });
 
 app.post("/users", (req, res) => {
