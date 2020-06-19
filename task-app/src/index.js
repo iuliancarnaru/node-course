@@ -41,6 +41,25 @@ app.post("/users", async (req, res) => {
   }
 });
 
+app.patch("/users/:id", async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const updateData = req.body;
+
+    const user = await User.findByIdAndUpdate(_id, updateData, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!user) return res.status(404).send();
+    res.send(user);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// ------------------------------------------------
+
 app.get("/tasks", async (req, res) => {
   try {
     const tasks = await Task.find({});
