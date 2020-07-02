@@ -45,6 +45,6 @@ test("Should not delete other user tasks", async () => {
     .send()
     .expect(404);
 
-  const taskOne = await TaskOne.findById(taskOne._id);
+  const task = await Task.findById(taskOne._id);
   expect(task).not.toBeNull();
 });
