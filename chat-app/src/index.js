@@ -11,16 +11,18 @@ const port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, "../public")));
 
-let count = 0;
+const message = `Welcome`;
 
 io.on("connection", (socket) => {
-  console.log("new socket connection");
-  socket.emit("countUpdated", count);
+  socket.emit("message", message);
+  socket.broadcast.emit("message", "A new user has joined the chat");
 
-  socket.on("increment", () => {
-    count++;
-    // socket.emit("countUpdated", count);
-    io.emit("countUpdated", count);
+  socket.on("sendMessage", (message) => {
+    io.emit("message", message);
+  });
+
+  socket.on("disconnect", () => {
+    io.emit("message", "A user had left");
   });
 });
 
