@@ -3,28 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/styles.min.css" />
     <title>Chat app</title>
   </head>
   <body>
-    <h1>Welcome to Chat App</h1>
-    <div id="messages"></div>
-    <div id="location"></div>
+    <div class="chat">
+      <div class="chat__sidebar"></div>
+      <div class="chat__main">
+        <div id="messages" class="chat__messages"></div>
+        <div class="compose">
+          <form id="message-form">
+            <input name="message" type="text" placeholder="message" />
+            <button type="submit">Send</button>
+          </form>
 
-    <form id="message-form">
-      <input name="message" type="text" placeholder="message" />
-      <button type="submit">Send</button>
-    </form>
-    <button type="button" id="send-location">Send location</button>
+          <button type="button" id="send-location">Send location</button>
+        </div>
+      </div>
+    </div>
 
     <script id="message-template" type="text/html">
-      <div>
+      <div class="message">
+        <p>
+          <span class="message__name">User name</span>
+          <span class="message__meta">{{createdAt}}</span>
+        </p>
         <p>{{message}}</p>
       </div>
     </script>
 
     <script id="location-template" type="text/html">
       <div>
-        <a href="{{url}}" target="_blank">My current location</a>
+        <p>{{createdAt}} - <a href="{{url}}" target="_blank">My current location</a>
       </div>
     </script>
 
