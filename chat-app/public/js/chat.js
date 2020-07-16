@@ -18,6 +18,7 @@ const { username, room } = Qs.parse(location.search, {
 
 socket.on("message", (message) => {
   const html = Mustache.render(messageTemplate, {
+    username: message.username,
     message: message.text,
     createdAt: moment(message.createdAt).format("h:mm a"),
   });
@@ -26,6 +27,7 @@ socket.on("message", (message) => {
 
 socket.on("locationMessage", (message) => {
   const html = Mustache.render(locationTemplate, {
+    username: message.username,
     url: message.url,
     createdAt: moment(message.createdAt).format("h:mm a"),
   });
@@ -55,7 +57,7 @@ $messageForm.addEventListener("submit", (event) => {
 
 $sendLocationButton.addEventListener("click", (event) => {
   if (!navigator.geolocation) {
-    return alert("Geolocation not suported by your browser");
+    return alert("Geolocation not supported by your browser");
   }
 
   $sendLocationButton.setAttribute("disabled", "disabled");
@@ -69,4 +71,9 @@ $sendLocationButton.addEventListener("click", (event) => {
   });
 });
 
-socket.emit("join", { username, room });
+socket.emit("join", { username, room }, (error) => {
+  if (error) {
+    alert(error);
+    location.href = "/";
+  }
+});

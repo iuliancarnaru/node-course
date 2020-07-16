@@ -14,6 +14,7 @@
     "@types/socket.io": "^2.1.8",
     "bad-words": "^3.0.3",
     "express": "^4.17.1",
+    "prettier": "^2.0.5",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
