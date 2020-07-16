@@ -18,9 +18,22 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 const message = `Welcome`;
 
+// socket.emit -> specific client
+// io.emit -> every connected client
+// socket.broadcast.emit
+// -> every connected client except the one that is creating the message
+// io.to.emit -> to everyone in a specific room
+// socket.broadcast.to.emit
+// -> every connected client except the one that is creating the message in a room
+
 io.on("connection", (socket) => {
-  socket.emit("message", generateMessage("Welcome!"));
-  socket.broadcast.emit("message", generateMessage("A new user has joined!"));
+
+
+  socket.on("join", ({ username, room }) => {
+    socket.join(room);
+    socket.emit("message", generateMessage("Welcome!"));
+    socket.broadcast.to(room).emit("message", generateMessage(`${username} has joined`));
+  });
 
   socket.on("sendMessage", (message, callback) => {
     const filter = new Filter();
